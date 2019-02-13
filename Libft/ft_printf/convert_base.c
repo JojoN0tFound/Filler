@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 20:00:21 by nivergne          #+#    #+#             */
-/*   Updated: 2019/02/12 18:00:04 by julesqvgn        ###   ########.fr       */
+/*   Updated: 2019/02/13 14:58:31 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ unsigned long long	itooct(unsigned long long nb)
 	return (octnbr);
 }
 
-unsigned long long	get_size(unsigned long long value, int base)
+unsigned long long	nbsize(unsigned long long value, int base)
 {
 	int		size;
 
@@ -43,7 +43,7 @@ unsigned long long	get_size(unsigned long long value, int base)
 	return (size);
 }
 
-char				*fill_base(int base, int l)
+char				*size_base(int base, int l)
 {
 	int		i;
 	char	*base_arr;
@@ -73,8 +73,8 @@ char				*conv(unsigned long long value, int base, int l)
 	char				*base_res;
 
 	uns = value;
-	i = get_size(uns, base);
-	if (!(base_arr = fill_base(base, l)))
+	i = nbsize(uns, base);
+	if (!(base_arr = size_base(base, l)))
 		return (NULL);
 	if (!(base_res = (char *)malloc(sizeof(char) * (i + 1))))
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 16:48:36 by nivergne          #+#    #+#             */
-/*   Updated: 2019/02/11 18:48:47 by nivergne         ###   ########.fr       */
+/*   Updated: 2019/02/13 14:58:57 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ int						t_info_init(t_info *o, int i);
 int						check_type(char c, t_info *o);
 int						ft_accuracy(t_info *o);
 
-unsigned long long		res_size(unsigned long long value, int base);
-char					*fill_base(int base, int l);
+unsigned long long		nbsize(unsigned long long value, int base);
+char					*size_base(int base, int l);
 char					*conv(unsigned long long value, int base, int l);
 unsigned long long		itooct(unsigned long long nb);
 
