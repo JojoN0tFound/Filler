@@ -6,7 +6,7 @@
 /*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 17:53:31 by julesqvgn         #+#    #+#             */
-/*   Updated: 2019/02/13 14:49:11 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/02/14 15:09:26 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct	s_map
 	int		size_y;
 	int		current_x;
 	int		current_y;
+	int		last_x;
+	int		last_y;
 	char	letter;
 	char	**map;
 }				t_map;

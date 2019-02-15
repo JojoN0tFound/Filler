@@ -6,7 +6,7 @@
 /*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 03:18:33 by nivergne          #+#    #+#             */
-/*   Updated: 2019/02/11 17:58:15 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/02/14 16:13:05 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	ft_nbrsign(t_info *o)
 	if (!o->minus)
 	{
 		o->plus && !o->neg ? append_to_buff('+', 0, o) : 0;
-		o->space && !o->plus && !o->neg ?
-			append_to_buff(' ', 0, o) : 0;
+		o->space && !o->plus && !o->neg
+		? append_to_buff(' ', 0, o) : 0;
 		o->neg ? append_to_buff('-', 0, o) : 0;
 	}
 }
@@ -59,8 +59,8 @@ void	ft_addnbr(long long cast_ap, t_info *o)
 	size = width_size_diou(o, cast_ap, 10);
 	o->plus && o->minus && !o->neg ?
 		append_to_buff('+', 0, o) : 0;
-	!o->plus && o->minus && !o->neg && o->space ?
-		append_to_buff(' ', 0, o) : 0;
+	!o->plus && o->minus && !o->neg && o->space
+	? append_to_buff(' ', 0, o) : 0;
 	o->neg && o->minus ? append_to_buff('-', 0, o) : 0;
 	o->accuracy > 0 && o->minus ? ft_accuracy(o) : 0;
 	o->minus == 1 ? ft_addnbr_core(cast_ap, o) : 0;

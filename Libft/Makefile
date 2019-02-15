@@ -126,11 +126,17 @@ $(NAME): $(OBJ) $(OBJLIB)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@$(CC) $(FLAGS) $(INCLUDE) -o $@ -c $<
+	@echo "\033[38;2;0;255;0m[cc]\033[0m: $< -> $@"
+	@printf "\e[1A"
+	@$(CC) $(FLAGS) -Ofast $(INCLUDE) -o $@ -c $<
+	@printf "\e[0K"
 
 $(OBJLIB_PATH)/%.o: $(LIB_PATH)/%.c
 	@mkdir $(OBJLIB_PATH) 2> /dev/null || true
+	@echo "\033[38;2;0;255;0m[cc]\033[0m: $< -> $@"
+	@printf "\e[1A"
 	@$(CC) $(FLAGS) $(INCLUDE) -o $@ -c $<
+	@printf "\e[0K"
 
 clean:
 	@rm -rf $(OBJ) $(OBJLIB)
