@@ -6,13 +6,13 @@
 #    By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/12 17:21:14 by julesqvgn         #+#    #+#              #
-#    Updated: 2019/02/14 14:29:48 by jquivogn         ###   ########.fr        #
+#    Updated: 2019/02/20 15:57:24 by jquivogn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 NAME = jquivogn.filler
 
@@ -27,6 +27,9 @@ INC_PATH = ./include
 OBJ_PATH = ./obj
 
 SRC_NAME =	main.c \
+			play.c \
+			print_coor.c \
+			get.c
 
 INC_NAME = filler.h
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -39,7 +42,7 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 all: logo libft $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(FLAGS) $(INCLUDE) $(OBJ) $(LIBFT) -o $(NAME) 2> /dev/null || true
+	@$(CC) $(FLAGS) $(INCLUDE) $(OBJ) $(LIBFT) -o $(NAME)
 	@echo "\033[38;2;0;255;255mfiller\t\033[1;33mCompilation\t\t\033[0;32m[OK]\033[0m"
 	@echo "\033[38;2;0;255;255mfiller\t\033[38;2;255;0;0m$(NAME)\t\t\033[0;32m[OK]\033[0m"
 
@@ -50,7 +53,7 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@echo "\033[38;2;0;255;0m[cc]\033[0m: $< -> $@"
 	@printf "\e[1A"
-	@$(CC) $(FLAGS) $(INCLUDE) $(LIBFT) -c $< -o $@ 2> /dev/null || true
+	@$(CC) $(FLAGS) $(INCLUDE) $(LIBFTOBJ) -c $< -o $@
 	@printf "\e[0K"
 
 clean:
