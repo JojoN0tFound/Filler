@@ -6,7 +6,7 @@
 /*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 00:06:32 by jquivogn          #+#    #+#             */
-/*   Updated: 2019/02/12 17:46:38 by julesqvgn        ###   ########.fr       */
+/*   Updated: 2019/02/22 00:25:13 by julesqvgn        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int			get_next_line(const int fd, char **line)
 	if (!lst_fd[fd])
 		lst_fd[fd] = ft_strdup("");
 	while (!(ft_strchr(lst_fd[fd], '\n'))
-		&& (ret = read(fd, buffer, BUFF)) > 0)
+		&& (ret = read(fd, buffer, BUFF)) > 0 && *buffer)
 	{
 		buffer[ret] = '\0';
 		if (!(tmp = ft_strjoin(lst_fd[fd], buffer)))

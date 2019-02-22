@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filler.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 17:53:31 by julesqvgn         #+#    #+#             */
-/*   Updated: 2019/02/20 12:33:39 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/02/22 02:42:44 by julesqvgn        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ int				ft_get_info(t_map *map, t_piece *piece);
 int				ft_get_map(t_map *map);
 int				ft_get_piece(t_map *map, t_piece *piece);
 /*
-*print_coor.c
+*utils.c
 */
 void			ft_print_pos(int x, int y);
+int				ft_error(int error, t_map *map);
+void			ft_free_tab(char **tab);
 
 #endif

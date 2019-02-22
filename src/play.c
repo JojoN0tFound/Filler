@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 03:20:28 by jquivogn          #+#    #+#             */
-/*   Updated: 2019/02/20 15:44:12 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/02/22 03:11:47 by julesqvgn        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		ft_sonar(t_map *map, t_piece *piece)
 
 int		ft_find_pos(t_map *map, t_piece *piece)
 {
-	dprintf(2, "                                       <<<< X = %d    Y = %d >>>>\n", map->curr_x, map->curr_y);
+//	dprintf(2, "                                       <<<< X = %d    Y = %d >>>>\n", map->curr_x, map->curr_y);
 	piece->act_y = 0;
 	while (piece->act_y < piece->heigth)
 	{
@@ -57,7 +57,7 @@ int		ft_find_pos(t_map *map, t_piece *piece)
 					if (ft_sonar(map, piece) != 0)
 					{
 						map->best_range = map->range;
-						dprintf(2, "range max = %d   X = %d    Y = %d\n", map->best_range, map->curr_x, map->curr_y);
+						//dprintf(2, "range max = %d   X = %d    Y = %d\n", map->best_range, map->curr_x, map->curr_y);
 						map->pos_x = map->curr_x;
 						map->pos_y = map->curr_y;
 					}
@@ -83,19 +83,25 @@ int		ft_check_place(t_map *map, t_piece *piece)
 		piece->act_x = 0;
 		while (piece->act_x < piece->weidth)
 		{
-			if (map->curr_y + piece->act_y < map->h_size && map->curr_x + piece->act_x < map->w_size)
+			if (map->curr_y + piece->act_y < map->h_size && map->curr_x + piece->act_x < map->w_size && map->curr_y + piece->act_y >= 0 && map->curr_x + piece->act_x >= 0)
 			{
 				if (map->map[map->curr_y + piece->act_y][map->curr_x + piece->act_x] == map->p_letter
 				&& piece->piece[piece->act_y][piece->act_x] == '*')
-				{
-					dprintf(2, "=> X = %d + %d   Y = %d + %d    | %c |\n", map->curr_x, piece->act_x, map->curr_y, piece->act_y, map->map[map->curr_y + piece->act_y][map->curr_y + piece->act_x]);
-					dprintf(2, "-- %s\n", map->map[12]);
 					ancre += 1;
-				}
-				// if (map->map[map->curr_y + piece->act_y][map->curr_y + piece->act_x] != '.'
-				// && map->map[map->curr_y + piece->act_y][map->curr_y + piece->act_x] != map->p_letter)
-				// 	return (ft_check_place(map, piece));
+				if (map->map[map->curr_y + piece->act_y][map->curr_x + piece->act_x] == map->a_letter
+				&& piece->piece[piece->act_y][piece->act_x] == '*')
+					return (0);
+				if (ancre > 1)
+					return (0);
+				// if ((map->map[map->curr_y + piece->act_y][map->curr_y + piece->act_x] != '.'
+				// && map->map[map->curr_y + piece->act_y][map->curr_y + piece->act_x] != map->p_letter) || ancre > 1)
+				// {
+				// 	dprintf(2, "=> X = %d + %d   Y = %d + %d    | %c |\n", map->curr_x, piece->act_x, map->curr_y, piece->act_y, map->map[map->curr_y + piece->act_y][map->curr_y + piece->act_x]);
+				// 	return (0);
+				// }
 			}
+			else
+				return (0);
 			piece->act_x += 1;
 		}
 		piece->act_y += 1;
@@ -107,10 +113,11 @@ int		ft_check_place(t_map *map, t_piece *piece)
 
 int		ft_search_place(t_map *map, t_piece *piece)
 {
-	dprintf(2, "==========================\n");
+	//dprintf(2, "==========================\n");
+	map->curr_y = -piece->y;
 	while (map->curr_y < map->h_size)
 	{
-		map->curr_x = 0;
+		map->curr_x = -piece->x;
 		while (map->curr_x < map->w_size)
 		{
 			ft_check_place(map, piece);
@@ -123,12 +130,19 @@ int		ft_search_place(t_map *map, t_piece *piece)
 
 int		ft_play(t_map *map, t_piece *piece)
 {
-	dprintf(2, "-- %s\n", map->map[12]);
+	int i = 0;
+
 	if (!ft_search_place(map, piece))
 		return (0);
-	dprintf(2, "X = %d    Y = %d\n", map->pos_x, map->pos_y);
-	if (map->finish == 1)
+	if (map->pos_x == 0 && map->pos_y == 0)
 	{
+		while (map->map[i])
+			dprintf(2, "%s\n", map->map[i++]);
+		dprintf(2, "\n\n");
+		i = 0;
+		while (piece->piece[i])
+			dprintf(2, "%s\n", piece->piece[i++]);
+		dprintf(2, "\n\nX = %d    Y = %d\n", map->pos_x, map->pos_y);
 		ft_print_pos(0, 0);
 		return (0);
 	}

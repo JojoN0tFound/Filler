@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+         #
+#    By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/12 17:21:14 by julesqvgn         #+#    #+#              #
-#    Updated: 2019/02/20 15:57:24 by jquivogn         ###   ########.fr        #
+#    Updated: 2019/02/22 02:17:48 by julesqvgn        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,8 @@ OBJ_PATH = ./obj
 
 SRC_NAME =	main.c \
 			play.c \
-			print_coor.c \
-			get.c
+			get.c \
+			utils.c
 
 INC_NAME = filler.h
 OBJ_NAME = $(SRC_NAME:.c=.o)
