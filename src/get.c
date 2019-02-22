@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 03:19:24 by jquivogn          #+#    #+#             */
-/*   Updated: 2019/02/22 02:42:20 by julesqvgn        ###   ########.fr       */
+/*   Updated: 2019/02/22 17:52:38 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int		ft_get_info(t_map *map, t_piece *piece)
 	int		i;
 
 	i = 0;
-	if (get_next_line(0, &line) <= 0)/*player id*/
+	if (get_next_line(0, &line) <= 0)
 		return (0);
 	map->p_id = ft_atoi(&line[10]);
 	free(line);
 	map->p_letter = map->p_id == 1 ? 'O' : 'X';
 	map->a_letter = map->p_id == 2 ? 'O' : 'X';
-	if (get_next_line(0, &line) <= 0)/*map size*/
+	if (get_next_line(0, &line) <= 0)
 		return (0);
 	while (line[i] && !ft_isdigit(*(line + i)))
 			i++;
@@ -78,16 +78,16 @@ int		ft_get_map(t_map *map)
 	i = 0;
 	if (map->round != 0)
 	{
-		if (get_next_line(0, &line) <= 0)/*map size*/
+		if (get_next_line(0, &line) <= 0)
 			return (0);
 		free(line);
 	}
-	if (get_next_line(0, &line) <= 0)/*map absciss*/
+	if (get_next_line(0, &line) <= 0)
 		return (0);
 	free(line);
 	while (i < map->h_size)
 	{
-		if (get_next_line(0, &line) <= 0)/*map*/
+		if (get_next_line(0, &line) <= 0)
 			return (0);
 		while (*line && (*line == ' ' || (*line >= '0' && *line <= '9' )))
 			line++;
@@ -111,8 +111,9 @@ static void	ft_get_corner(t_piece *piece)
 		{
 			if (piece->piece[i][j] == '*')
 			{
-				piece->x = j;
-				piece->y = i;
+				piece->cor_x = j;
+				piece->cor_y = i;
+				return ;
 			}
 			j++;
 		}
@@ -124,28 +125,26 @@ int		ft_get_piece(t_map *map, t_piece *piece)
 {
 	char	*line;
 	int		i;
-	int		l;
 
 	i = 0;
-	l = 0;
-	if (get_next_line(0, &line) <= 0)/*piece size*/
+	if (get_next_line(0, &line) <= 0)
 		return (-1);
-	while (line[l] && !ft_isdigit(line[l]))
-		l++;
-	piece->heigth = ft_atoi(line + l);
-	while (line[l] && ft_isdigit(line[l]))
-		l++;
-	piece->weidth = ft_atoi(line + l);
+	while (line[i] && !ft_isdigit(line[i]))
+		i++;
+	piece->heigth = ft_atoi(line + i);
+	while (line[i] && ft_isdigit(line[i]))
+		i++;
+	piece->weidth = ft_atoi(line + i);
 	free(line);
 	if (!ft_create_map(1, map, piece))
 		return (-1);
-	while (i < piece->heigth)
+	i = -1;
+	while (++i < piece->heigth)
 	{
-		if (get_next_line(0, &line) <= 0)/*piece*/
+		if (get_next_line(0, &line) <= 0)
 			return (-1);
 		piece->piece[i] = ft_strcpy(piece->piece[i], line);
 		free(line);
-		i++;
 	}
 	ft_get_corner(piece);
 	return (1);

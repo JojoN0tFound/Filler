@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 17:57:12 by julesqvgn         #+#    #+#             */
-/*   Updated: 2019/02/22 02:42:57 by julesqvgn        ###   ########.fr       */
+/*   Updated: 2019/02/22 16:54:25 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	ft_init_round(t_map *map, t_piece *piece)
 	map->curr_y = 0;
 	map->pos_x = 0;
 	map->pos_y = 0;
-	piece->act_x = 0;
-	piece->act_y = 0;
+	piece->cor_x = 0;
+	piece->cor_y = 0;
 	piece->weidth = 0;
 	piece->heigth = 0;
 	piece->x = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filler.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 17:53:31 by julesqvgn         #+#    #+#             */
-/*   Updated: 2019/02/22 02:42:44 by julesqvgn        ###   ########.fr       */
+/*   Updated: 2019/02/22 17:14:55 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct	s_piece
 	int		heigth;
 	int		x;
 	int		y;
-	int		act_x;
-	int		act_y;
+	int		cor_x;
+	int		cor_y;
 	char	**piece;
 }				t_piece;
 
@@ -54,7 +54,7 @@ typedef struct	s_piece
 int				ft_search_place(t_map *map, t_piece *piece);
 int				ft_find_pos(t_map *map, t_piece *piece);
 int				ft_sonar(t_map *map, t_piece *piece);
-int				ft_check_place(t_map *map, t_piece *piece);
+int				ft_check_place(t_map *map, t_piece *p);
 int				ft_play(t_map *map, t_piece *piece);
 /*
 *get.c

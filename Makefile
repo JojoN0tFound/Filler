@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+         #
+#    By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/12 17:21:14 by julesqvgn         #+#    #+#              #
-#    Updated: 2019/02/22 02:17:48 by julesqvgn        ###   ########.fr        #
+#    Updated: 2019/02/22 20:22:50 by jquivogn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,15 @@ FLAGS = -Wall -Wextra -Werror -g
 
 NAME = jquivogn.filler
 
+VIZU_BIN = filler.vizu
+
 LIBFT = -L ./Libft/ -I ./Libft/include -lft
 
 LIBFTOBJ = -I ./Libft/include
 
 INCLUDE = -I ./include/
+
+MLX = -lmlx -framework OpenGL -framework AppKit
 
 SRC_PATH = ./src
 INC_PATH = ./include
@@ -31,26 +35,39 @@ SRC_NAME =	main.c \
 			get.c \
 			utils.c
 
-INC_NAME = filler.h
+VIZU_NAME = vizu/mainvizu.c \
+
+INC =	vizu.h \
+		filler.h
+
 OBJ_NAME = $(SRC_NAME:.c=.o)
-OBJLIB_NAME = $(LIB_NAME:.c=.o)
+OBJ_VIZU_NAME = $(VIZU_NAME:.c=.o)
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
+VIZU = $(addprefix $(VIZU_PATH)/, $(VIZU_NAME))
 INC = $(addprefix $(INC_PATH)/, $(INC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+OBJ_VIZU = $(addprefix $(OBJ_PATH)/,$(OBJ_VIZU_NAME))
 
 all: logo libft $(NAME)
 
-$(NAME): $(OBJ)
-	@$(CC) $(FLAGS) $(INCLUDE) $(OBJ) $(LIBFT) -o $(NAME)
-	@echo "\033[38;2;0;255;255mfiller\t\033[1;33mCompilation\t\t\033[0;32m[OK]\033[0m"
-	@echo "\033[38;2;0;255;255mfiller\t\033[38;2;255;0;0m$(NAME)\t\t\033[0;32m[OK]\033[0m"
+vizu: logo libft $(VIZU)
 
 libft:
 	@$(MAKE) -C libft/
 
+$(NAME): $(OBJ) $(INC)
+	@$(CC) $(FLAGS) $(INCLUDE) $(OBJ) $(LIBFT) -o $(NAME)
+	@echo "\033[38;2;0;255;255mfiller\t\033[1;33mCompilation\t\t\033[0;32m[OK]\033[0m"
+	@echo "\033[38;2;0;255;255mfiller\t\033[38;2;255;0;0m$(NAME)\t\t\033[0;32m[OK]\033[0m"
+
+$(VIZU): $(OBJ) $(OBJ_VIZU) $(INC)
+	@$(CC) $(FLAGS) $(INCLUDE) $(OBJ_VIZU) $(MLX) $(LIBFT) -o $(VIZU_BIN)
+	@echo "\033[38;2;0;200;255mvizu\t\033[1;33mCompilation\t\t\033[0;32m[OK]\033[0m"
+	@echo "\033[38;2;0;200;255mvizu\t\033[38;2;255;0;0m$(VIZU_BIN)\t\t\033[0;32m[OK]\033[0m"
+
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	@mkdir $(dir $(OBJ_PATH)/$*) 2> /dev/null || true
 	@echo "\033[38;2;0;255;0m[cc]\033[0m: $< -> $@"
 	@printf "\e[1A"
 	@$(CC) $(FLAGS) $(INCLUDE) $(LIBFTOBJ) -c $< -o $@
@@ -58,13 +75,15 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 
 clean:
 	@$(MAKE) -C libft/ clean
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJ) $(OBJ_VIZU) $(OBJ_PATH)
 	@echo "\033[38;2;0;255;255mfiller\t\033[1;33mCleaning obj\t\t\033[0;32m[OK]\033[0m"
+	@echo "\033[38;2;0;200;255mvizu\t\033[1;33mCleaning obj\t\t\033[0;32m[OK]\033[0m"
 
 fclean: clean
 	@$(MAKE) -C libft/ fclean
-	@rm -rf ./obj $(NAME)
+	@rm -rf $(NAME) $(VIZU)
 	@echo "\033[38;2;0;255;255mfiller\t\033[1;33mCleaning exe\t\t\033[0;32m[OK]\033[0m"
+	@echo "\033[38;2;0;200;255mvizu\t\033[1;33mCleaning exe\t\t\033[0;32m[OK]\033[0m"
 
 logo:
 	@echo ""
@@ -79,4 +98,4 @@ logo:
 
 re: fclean all
 
-.PHONY: all clean fclean re logo libft
+.PHONY: all vizu clean fclean re logo libft
