@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+         #
+#    By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/12 17:21:14 by julesqvgn         #+#    #+#              #
-#    Updated: 2019/02/22 20:22:50 by jquivogn         ###   ########.fr        #
+#    Updated: 2019/02/24 17:03:06 by julesqvgn        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIBFTOBJ = -I ./Libft/include
 
 INCLUDE = -I ./include/
 
-MLX = -lmlx -framework OpenGL -framework AppKit
+MLX = -L../../../minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
 
 SRC_PATH = ./src
 INC_PATH = ./include
@@ -35,7 +35,9 @@ SRC_NAME =	main.c \
 			get.c \
 			utils.c
 
-VIZU_NAME = vizu/mainvizu.c \
+VIZU_NAME =	vizu/mainvizu.c \
+			vizu/print.c \
+			vizu/read.c	
 
 INC =	vizu.h \
 		filler.h
@@ -81,7 +83,7 @@ clean:
 
 fclean: clean
 	@$(MAKE) -C libft/ fclean
-	@rm -rf $(NAME) $(VIZU)
+	@rm -rf $(NAME) $(VIZU_BIN)
 	@echo "\033[38;2;0;255;255mfiller\t\033[1;33mCleaning exe\t\t\033[0;32m[OK]\033[0m"
 	@echo "\033[38;2;0;200;255mvizu\t\033[1;33mCleaning exe\t\t\033[0;32m[OK]\033[0m"
 

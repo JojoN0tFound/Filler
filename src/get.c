@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 03:19:24 by jquivogn          #+#    #+#             */
-/*   Updated: 2019/02/22 17:52:38 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/02/24 05:01:26 by julesqvgn        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int		ft_get_map(t_map *map)
 		while (*line && (*line == ' ' || (*line >= '0' && *line <= '9' )))
 			line++;
 		map->map[i] = ft_strcpy(map->map[i], line);
+		//free(line);
 		i++;
 	}
 	return (1);
