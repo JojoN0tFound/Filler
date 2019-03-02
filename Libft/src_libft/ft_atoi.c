@@ -6,7 +6,7 @@
 /*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 19:12:42 by jquivogn          #+#    #+#             */
-/*   Updated: 2018/11/08 22:11:05 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/03/02 13:29:24 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ long	ft_atoi(const char *str)
 	i = 0;
 	nb = 0;
 	neg = 0;
-	while (str && (str[i] == '\t' || str[i] == '\n' || str[i] == '\r' ||
-		str[i] == '\v' || str[i] == '\f' || str[i] == ' '))
+	while (str && (str[i] == '\t' || str[i] == '\n' || str[i] == '\r'
+			|| str[i] == '\v' || str[i] == '\f' || str[i] == ' '))
 		i++;
 	if (str[i] == '-')
 		neg = 1;

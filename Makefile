@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+         #
+#    By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/12 17:21:14 by julesqvgn         #+#    #+#              #
-#    Updated: 2019/02/24 17:03:06 by julesqvgn        ###   ########.fr        #
+#    Updated: 2019/03/02 18:32:26 by jquivogn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIBFTOBJ = -I ./Libft/include
 
 INCLUDE = -I ./include/
 
-MLX = -L../../../minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
+MLX = -lmlx -framework OpenGL -framework AppKit
 
 SRC_PATH = ./src
 INC_PATH = ./include
@@ -37,10 +37,12 @@ SRC_NAME =	main.c \
 
 VIZU_NAME =	vizu/mainvizu.c \
 			vizu/print.c \
-			vizu/read.c	
+			vizu/tools.c \
+			vizu/use.c \
+			vizu/read.c
 
-INC =	vizu.h \
-		filler.h
+INC_NAME =	vizu.h \
+			filler.h
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_VIZU_NAME = $(VIZU_NAME:.c=.o)

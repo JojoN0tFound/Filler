@@ -3,54 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mainvizu.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:09:01 by jquivogn          #+#    #+#             */
-/*   Updated: 2019/02/26 22:11:15 by julesqvgn        ###   ########.fr       */
+/*   Updated: 2019/03/02 17:57:08 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vizu.h"
 
-int		ft_end(t_vizu *v)
-{
-	printf("end\n");
-	free(v->player_one);
-	free(v->player_two);
-	v->start = 2;
-	return (3);
-}
-
-void			ft_error(char *err)
-{
-	ft_putendl(err);
-	exit(0);
-}
-
-int		ft_free_and_exit(t_vizu *v)
-{
-	mlx_destroy_image(v->e.mlx, v->map.ptr);
-	mlx_destroy_image(v->e.mlx, v->info.ptr);
-	mlx_destroy_window(v->e.mlx, v->e.win);
-	free(v->e.mlx);
-	exit(0);
-	return (0);
-}
-
-int		key_press(int key, void *param)
-{
-	t_vizu	*v;
-
-	v = (t_vizu *)param;
-	ft_bzero(v->info.data, 1000 * 700);
-	if (key == KEY_ESC)
-		return (ft_free_and_exit(v));
-	if (key == KEY_ENTER && v->start != 2)
-		return (ft_draw(v));
-	return (1);
-}
-
-int		ft_init(t_vizu *v)
+static int	ft_init(t_vizu *v)
 {
 	v->player = 1;
 	v->w_map = 0;
@@ -90,7 +52,7 @@ static int	ft_init_mlx(t_env *e, t_img *map)
 	return (1);
 }
 
-int		ft_init_img_info(t_img *info, t_env *e, t_img *map)
+static int	ft_init_img_info(t_img *info, t_env *e, t_img *map)
 {
 	if (!(info->ptr = mlx_new_image(e->mlx, 1000, 700)))
 	{
@@ -113,14 +75,14 @@ int		ft_init_img_info(t_img *info, t_env *e, t_img *map)
 	return (1);
 }
 
-int		main(void)
+int			main(void)
 {
 	t_vizu	v;
 
 	if (ft_init_mlx(&v.e, &v.map) == -1
 				|| ft_init_img_info(&v.info, &v.e, &v.map) == -1
 				|| ft_read_file(&v) == -1)
-			ft_error("Error");
+		ft_error("Error");
 	ft_init(&v);
 	ft_draw(&v);
 	mlx_hook(v.e.win, 2, 1L << 2, &key_press, (void *)&v);

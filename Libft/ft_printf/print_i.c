@@ -6,7 +6,7 @@
 /*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 03:18:33 by nivergne          #+#    #+#             */
-/*   Updated: 2019/02/14 16:13:05 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/03/02 13:31:40 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	ft_addnbr(long long cast_ap, t_info *o)
 	int		size;
 
 	size = width_size_diou(o, cast_ap, 10);
-	o->plus && o->minus && !o->neg ?
-		append_to_buff('+', 0, o) : 0;
+	o->plus && o->minus && !o->neg
+		? append_to_buff('+', 0, o) : 0;
 	!o->plus && o->minus && !o->neg && o->space
 	? append_to_buff(' ', 0, o) : 0;
 	o->neg && o->minus ? append_to_buff('-', 0, o) : 0;
@@ -69,8 +69,8 @@ void	ft_addnbr(long long cast_ap, t_info *o)
 		ft_nbrsign(o);
 	if (o->width >= 0 && size > 0)
 		while (size-- > 0)
-			append_to_buff(o->zero && !o->minus &&
-				o->accuracy < 0 ? '0' : ' ', 0, o);
+			append_to_buff(o->zero && !o->minus
+			&& o->accuracy < 0 ? '0' : ' ', 0, o);
 	if (!(o->zero && o->accuracy == -1))
 		ft_nbrsign(o);
 	o->accuracy > 0 && !o->minus ? ft_accuracy(o) : 0;

@@ -6,7 +6,7 @@
 /*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 03:20:28 by jquivogn          #+#    #+#             */
-/*   Updated: 2019/02/22 20:52:33 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/03/02 13:27:31 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,19 @@ int		ft_sonar(t_map *map, t_piece *piece)
 
 int		ft_find_pos(t_map *map, t_piece *piece)
 {
-	piece->y = 0;
-	while (piece->y < piece->heigth)
+	piece->y = -1;
+	while (++piece->y < piece->heigth)
 	{
-		piece->x = 0;
-		while (piece->x < piece->weidth)
+		piece->x = -1;
+		while (++piece->x < piece->weidth)
 		{
 			if (piece->piece[piece->y][piece->x] == '*')
 			{
 				map->range = 1;
 				while (map->range <= map->best_range)
 				{
-					if (ft_sonar(map, piece) != 0 && map->range < map->best_range)
+					if (ft_sonar(map, piece) != 0
+						&& map->range < map->best_range)
 					{
 						map->best_range = map->range;
 						map->pos_x = map->curr_x;
@@ -62,20 +63,16 @@ int		ft_find_pos(t_map *map, t_piece *piece)
 					map->range += 1;
 				}
 			}
-			piece->x += 1;
 		}
-		piece->y += 1;
 	}
 	return (1);
 }
 
 int		ft_check_place(t_map *map, t_piece *p)
 {
-	int	ancre;
-
-	ancre = 0;
-	p->y = 0;
-	while (p->y < p->heigth)
+	map->ancre = 0;
+	p->y = -1;
+	while (++p->y < p->heigth)
 	{
 		p->x = -1;
 		while (++p->x < p->weidth)
@@ -90,14 +87,13 @@ int		ft_check_place(t_map *map, t_piece *p)
 			}
 			if (map->map[map->curr_y + p->y][map->curr_x + p->x]
 			== map->p_letter && p->piece[p->y][p->x] == '*')
-				ancre += 1;
+				map->ancre += 1;
 			if ((map->map[map->curr_y + p->y][map->curr_x + p->x]
-			== map->a_letter && p->piece[p->y][p->x] == '*') || ancre > 1)
+			== map->a_letter && p->piece[p->y][p->x] == '*') || map->ancre > 1)
 				return (0);
 		}
-		p->y += 1;
 	}
-	return (ancre);
+	return (map->ancre);
 }
 
 int		ft_search_place(t_map *map, t_piece *piece)
@@ -105,7 +101,7 @@ int		ft_search_place(t_map *map, t_piece *piece)
 	map->curr_y = -piece->cor_y;
 	while (map->curr_y < map->h_size)
 	{
-		map->curr_x = -piece->cor_x ;
+		map->curr_x = -piece->cor_x;
 		while (map->curr_x < map->w_size)
 		{
 			if (ft_check_place(map, piece) == 1)

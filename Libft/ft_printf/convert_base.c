@@ -6,7 +6,7 @@
 /*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 20:00:21 by nivergne          #+#    #+#             */
-/*   Updated: 2019/02/13 14:58:31 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/03/02 13:30:45 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char				*conv(unsigned long long value, int base, int l)
 		return (NULL);
 	if (!(base_res = (char *)malloc(sizeof(char) * (i + 1))))
 	{
-		free (base_arr);
+		free(base_arr);
 		return (NULL);
 	}
 	base_res[i] = '\0';

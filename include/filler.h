@@ -6,7 +6,7 @@
 /*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 17:53:31 by julesqvgn         #+#    #+#             */
-/*   Updated: 2019/02/22 17:14:55 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/03/02 21:32:14 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct	s_map
 	int		finish;
 	int		range;
 	int		best_range;
+	int		ancre;
 	char	**map;
 }				t_map;
 
@@ -49,7 +50,7 @@ typedef struct	s_piece
 }				t_piece;
 
 /*
-*play.c
+**play.c
 */
 int				ft_search_place(t_map *map, t_piece *piece);
 int				ft_find_pos(t_map *map, t_piece *piece);
@@ -57,15 +58,17 @@ int				ft_sonar(t_map *map, t_piece *piece);
 int				ft_check_place(t_map *map, t_piece *p);
 int				ft_play(t_map *map, t_piece *piece);
 /*
-*get.c
+**get.c
 */
 int				ft_create_map(int c, t_map *map, t_piece *piece);
 int				ft_get_info(t_map *map, t_piece *piece);
 int				ft_get_map(t_map *map);
 int				ft_get_piece(t_map *map, t_piece *piece);
 /*
-*utils.c
+**utils.c
 */
+int				ft_check_line(char **line, t_map *map);
+int				ft_take_line(void);
 void			ft_print_pos(int x, int y);
 int				ft_error(int error, t_map *map);
 void			ft_free_tab(char **tab);
