@@ -6,7 +6,7 @@
 /*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 03:19:24 by jquivogn          #+#    #+#             */
-/*   Updated: 2019/03/02 22:20:22 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/03/02 23:33:30 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int			ft_create_map(int c, t_map *map, t_piece *piece)
 	i = -1;
 	if (c == 0)
 	{
-		if (!(map->map = (char **)malloc(sizeof(char *) * (map->h_size + 1))))
+		if (map->h_size < 0 || map->w_size < 0 || !(map->map
+		= (char **)malloc(sizeof(char *) * (map->h_size + 1))))
 			return (0);
 		map->map[map->h_size] = 0;
 		while (++i < map->h_size)
@@ -29,8 +30,8 @@ int			ft_create_map(int c, t_map *map, t_piece *piece)
 	}
 	else
 	{
-		if (!(piece->piece = (char **)malloc(sizeof(char *)
-			* (piece->heigth + 1))))
+		if (piece->heigth < 0 || piece->weidth < 0 || !(piece->piece
+		= (char **)malloc(sizeof(char *) * (piece->heigth + 1))))
 			return (0);
 		piece->piece[piece->heigth] = 0;
 		while (++i < piece->heigth)

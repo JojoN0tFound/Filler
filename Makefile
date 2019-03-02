@@ -6,7 +6,7 @@
 #    By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/12 17:21:14 by julesqvgn         #+#    #+#              #
-#    Updated: 2019/03/02 18:32:26 by jquivogn         ###   ########.fr        #
+#    Updated: 2019/03/02 23:28:16 by jquivogn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,9 +53,11 @@ INC = $(addprefix $(INC_PATH)/, $(INC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 OBJ_VIZU = $(addprefix $(OBJ_PATH)/,$(OBJ_VIZU_NAME))
 
-all: logo libft $(NAME)
+all: logo libft $(NAME) $(VIZU_BIN)
 
-vizu: logo libft $(VIZU)
+exe: logo libft $(NAME)
+
+vizu: logo libft $(VIZU_BIN)
 
 libft:
 	@$(MAKE) -C libft/
@@ -65,7 +67,7 @@ $(NAME): $(OBJ) $(INC)
 	@echo "\033[38;2;0;255;255mfiller\t\033[1;33mCompilation\t\t\033[0;32m[OK]\033[0m"
 	@echo "\033[38;2;0;255;255mfiller\t\033[38;2;255;0;0m$(NAME)\t\t\033[0;32m[OK]\033[0m"
 
-$(VIZU): $(OBJ) $(OBJ_VIZU) $(INC)
+$(VIZU_BIN): $(OBJ) $(OBJ_VIZU) $(INC)
 	@$(CC) $(FLAGS) $(INCLUDE) $(OBJ_VIZU) $(MLX) $(LIBFT) -o $(VIZU_BIN)
 	@echo "\033[38;2;0;200;255mvizu\t\033[1;33mCompilation\t\t\033[0;32m[OK]\033[0m"
 	@echo "\033[38;2;0;200;255mvizu\t\033[38;2;255;0;0m$(VIZU_BIN)\t\t\033[0;32m[OK]\033[0m"
