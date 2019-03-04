@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 17:57:12 by julesqvgn         #+#    #+#             */
-/*   Updated: 2019/03/02 21:00:44 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/03/04 10:20:23 by julesqvgn        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int			main(void)
 	ret = 0;
 	ft_init(&map);
 	if (!ft_get_info(&map, &piece))
-		return (ft_error(1, &map));
+		return (ft_error(1, &map, &piece));
 	while (1)
 	{
 		ft_init_round(&map, &piece);
 		if ((ret = ft_get_map(&map)) != 1
 			|| (ret = ft_get_piece(&map, &piece)) != 1)
-			return (ft_error(ret, &map));
+			return (ft_error(ret, &map, &piece));
 		if (!ft_play(&map, &piece))
 			break ;
 		map.round++;

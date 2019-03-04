@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 05:15:12 by jquivogn          #+#    #+#             */
-/*   Updated: 2019/03/02 22:19:46 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/03/04 10:20:50 by julesqvgn        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,18 @@ void		ft_print_pos(int x, int y)
 	write(1, "\n", 1);
 }
 
-int			ft_error(int error, t_map *map)
+int			ft_error(int error, t_map *map, t_piece *piece)
 {
 	if (error == 1)
 		write(2, "Parse error\n", 12);
 	else if (error == 0)
-		write(2, "Error during reading map\n", 25);
-	else if (error == -1)
 	{
+		ft_free_tab(map->map);
+		write(2, "Error during reading map\n", 25);
+	}
+	else if (error == -1 || error == -2)
+	{
+		error == -2 ? ft_free_tab(piece->piece) : 1;
 		ft_free_tab(map->map);
 		write(2, "Error during reading piece\n", 27);
 	}

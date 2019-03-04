@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 03:19:24 by jquivogn          #+#    #+#             */
-/*   Updated: 2019/03/02 23:33:30 by jquivogn         ###   ########.fr       */
+/*   Updated: 2019/03/04 10:18:46 by julesqvgn        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int			ft_get_piece(t_map *map, t_piece *piece)
 	piece->weidth = ft_atoi(line + i);
 	free(line);
 	if (!ft_create_map(1, map, piece))
-		return (-1);
+		return (-2);
 	i = -1;
 	while (++i < piece->heigth)
 	{
