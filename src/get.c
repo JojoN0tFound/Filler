@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 03:19:24 by jquivogn          #+#    #+#             */
-/*   Updated: 2019/03/04 10:18:46 by julesqvgn        ###   ########.fr       */
+/*   Updated: 2019/03/04 11:41:53 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int			ft_create_map(int c, t_map *map, t_piece *piece)
 	i = -1;
 	if (c == 0)
 	{
-		if (map->h_size < 0 || map->w_size < 0 || !(map->map
-		= (char **)malloc(sizeof(char *) * (map->h_size + 1))))
+		if (!(map->map = (char **)malloc(sizeof(char *) * (map->h_size + 1))))
 			return (0);
 		map->map[map->h_size] = 0;
 		while (++i < map->h_size)
@@ -30,8 +29,8 @@ int			ft_create_map(int c, t_map *map, t_piece *piece)
 	}
 	else
 	{
-		if (piece->heigth < 0 || piece->weidth < 0 || !(piece->piece
-		= (char **)malloc(sizeof(char *) * (piece->heigth + 1))))
+		if (!(piece->piece = (char **)malloc(sizeof(char *)
+			* (piece->heigth + 1))))
 			return (0);
 		piece->piece[piece->heigth] = 0;
 		while (++i < piece->heigth)
@@ -50,25 +49,24 @@ int			ft_get_info(t_map *map, t_piece *piece)
 	i = 0;
 	if (get_next_line(0, &line) <= 0)
 		return (0);
+	if (ft_strlen(line) < 10 || !ft_isdigit(line[10]))
+	{
+		free(line);
+		return (0);
+	}
 	map->p_id = ft_atoi(&line[10]);
 	free(line);
-	map->p_letter = map->p_id == 1 ? 'O' : 'X';
-	map->a_letter = map->p_id == 2 ? 'O' : 'X';
 	if (get_next_line(0, &line) <= 0)
 		return (0);
-	while (line[i] && !ft_isdigit(*(line + i)))
+	while (line[i] && !ft_isdigit(*(line + i)) && line[i] != '-')
 		i++;
 	map->h_size = ft_atoi(line + i);
 	while (line[i] && ft_isdigit(*(line + i)))
 		i++;
 	map->w_size = ft_atoi(line + i);
 	free(line);
-	if ((map->w_size <= 0 && map->h_size <= 0) || (map->p_id != 1 && map->p_id
-	!= 2))
-		return (0);
-	if (!ft_create_map(0, map, piece))
-		return (0);
-	return (1);
+	return ((map->w_size <= 0 && map->h_size <= 0) || (map->p_id != 1
+		&& map->p_id != 2) || !ft_create_map(0, map, piece) ? 0 : 1);
 }
 
 int			ft_get_map(t_map *map)
@@ -134,20 +132,21 @@ int			ft_get_piece(t_map *map, t_piece *piece)
 	i = 0;
 	if (get_next_line(0, &line) <= 0)
 		return (-1);
-	while (line[i] && !ft_isdigit(line[i]))
+	while (line[i] && !ft_isdigit(line[i]) && line[i] != '-')
 		i++;
 	piece->heigth = ft_atoi(line + i);
 	while (line[i] && ft_isdigit(line[i]))
 		i++;
 	piece->weidth = ft_atoi(line + i);
 	free(line);
-	if (!ft_create_map(1, map, piece))
-		return (-2);
+	if (piece->heigth <= 0 || piece->weidth <= 0
+	|| !ft_create_map(1, map, piece))
+		return (-1);
 	i = -1;
 	while (++i < piece->heigth)
 	{
 		if (get_next_line(0, &line) <= 0)
-			return (-1);
+			return (-2);
 		piece->piece[i] = ft_strcpy(piece->piece[i], line);
 		free(line);
 	}

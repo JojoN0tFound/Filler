@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julesqvgn <julesqvgn@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jquivogn <jquivogn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 17:57:12 by julesqvgn         #+#    #+#             */
-/*   Updated: 2019/03/04 10:20:23 by julesqvgn        ###   ########.fr       */
+/*   Updated: 2019/03/04 11:25:53 by jquivogn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int			main(void)
 	ft_init(&map);
 	if (!ft_get_info(&map, &piece))
 		return (ft_error(1, &map, &piece));
+	map.p_letter = map.p_id == 1 ? 'O' : 'X';
+	map.a_letter = map.p_id == 2 ? 'O' : 'X';
 	while (1)
 	{
 		ft_init_round(&map, &piece);
